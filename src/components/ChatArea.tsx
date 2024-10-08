@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ChatBar from './ChatBar';
 import { ChatInteraction } from './ChatInteraction';
 
 interface ChatAreaProps {
   onQuestionChange: (question: string) => void;
   answer: string;
+  question: string;
 }
 
-const ChatArea: React.FC<ChatAreaProps> = ({ onQuestionChange, answer }) => {
+const ChatArea: React.FC<ChatAreaProps> = ({ onQuestionChange, answer, question }) => {
   const [interactions, setInteractions] = useState<{ question: string; answer: string }[]>([]);
 
-  const handleQuestionChange = (newQuestion: string) => {
-    const newInteraction = { question: newQuestion, answer: answer };
-    setInteractions((prevInteractions) => [...prevInteractions, newInteraction]);
-    onQuestionChange(newQuestion);
-  };
+  // Add new interaction when the answer is updated
+  useEffect(() => {
+    if (answer && question) {
+      const newInteraction = { question, answer };
+      setInteractions((prevInteractions) => [...prevInteractions, newInteraction]);
+    }
+  }, [answer, question]);
 
   return (
     <div className="chatArea">
@@ -23,7 +26,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ onQuestionChange, answer }) => {
           <ChatInteraction key={index} question={interaction.question} answer={interaction.answer} />
         ))}
       </div>
-      <ChatBar onQuestionChange={handleQuestionChange} />
+      <ChatBar onQuestionChange={onQuestionChange} />
     </div>
   );
 };

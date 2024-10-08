@@ -1,14 +1,11 @@
-import React from "react";
+import React from 'react';
 
 interface ChatInteractionProps {
   question: string;
   answer: string;
 }
 
-export const ChatInteraction: React.FC<ChatInteractionProps> = ({
-  question,
-  answer,
-}) => {
+export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answer }) => {
   return (
     <div className="chatInteraction">
       <div className="userRequest">
@@ -19,7 +16,7 @@ export const ChatInteraction: React.FC<ChatInteractionProps> = ({
         ) : null}
       </div>
       <div className="chatbotResponse">
-        {question ? (
+        {answer ? (
           <div className="chatbotMessage">
             <p>{answer}</p>
           </div>
