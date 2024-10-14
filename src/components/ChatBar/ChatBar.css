@@ -6,7 +6,7 @@
   width: 100%;
   margin-bottom: 10px;
   margin-top: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--faded-color);
 }
 
 .searchBar {
@@ -21,7 +21,7 @@
   font-weight: 500;
   font-size: 14px;
   padding: 20px;
-  color: white;
+  color: var(--text-color);
   border-radius: 30px;
 }
 
@@ -54,12 +54,13 @@
   width: 100%;
   border-radius: 30px;
   padding: 15px;
-  background-color: rgba(255, 255, 255, 0.25);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  background-color: var(--faded-color);
+  color: var(--text-color);
+  border: 2px solid var(--faded-color);
 }
 
 .submitButton {
+  border: 2px solid transparent;
   border: none;
   outline: none;
   width: 45px;
@@ -68,16 +69,21 @@
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 14px;
-  color: black;
-  background-color: white;
+  color: var(--text-color-dark);
+  background-color: var(--accent-color);
   cursor: pointer;
   padding: 0;
   text-align: center;
 }
 
+.submitButton:hover {
+  border: 2px solid var(--hover-outline-color);
+  transition: border 0.3s;
+}
+
 .submitButton:disabled {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.25);
+  background-color: var(--faded-color);
+  color: var(--faded-text-color);
   cursor: default;
 }
 
@@ -92,11 +98,17 @@
   margin: 10px 0;
   border: 2px solid transparent;
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.5);
+  background-color: var(--faded-color);
+  color: var(--faded-text-color);
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s, border 0.3s;
+  transition: background-color 0.3s;
+  transition: border 0.3s;
+}
+
+.custom-button:hover {
+  border: 2px solid var(--hover-outline-color);
+  transition: border 0.3s;
 }
 
 .custom-button input[type='radio'] {
@@ -104,9 +116,9 @@
 }
 
 .custom-button.active {
-  color: black;
+  color: var(--text-color-dark);
   font-weight: 600;
-  background-color: rgb(255, 246, 78);
+  background-color: var(--accent-color);
 }
 
 .options {
@@ -114,6 +126,9 @@
   flex-direction: column;
   align-items: start;
   width: 100%;
+  height: auto;
+  max-height: 500px;
+  transition: height 0.3s;
 }
 
 .modelOptions {
@@ -125,7 +140,7 @@
 
 .lineBreak {
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--faded-color);
   margin-bottom: 7.5px;
 }
 
@@ -134,7 +149,7 @@
   font-weight: 500;
   font-size: 14px;
   border: transparent;
-  color: white;
+  color: var(--text-color);
   background-color: transparent;
   cursor: pointer;
   margin-bottom: 10px;
@@ -150,8 +165,8 @@
   height: 45px;
   display: inline-block;
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
+  background-color: var(--faded-color);
+  color: var(--text-color);
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s, border 0.3s;

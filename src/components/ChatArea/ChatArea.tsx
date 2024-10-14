@@ -51,7 +51,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ onQuestionSubmit, answer, question,
     <div className="chatArea">
       <div className="chatAreaScroller">
         {interactions.map((interaction, index) => (
-          <ChatInteraction key={index} question={interaction.question} answer={interaction.answer || '...'} time={interaction.time} />
+          <ChatInteraction key={index} question={interaction.question} answer={interaction.answer || 'Aan het nadenken...'} time={interaction.time} />
         ))}
       </div>
       <ChatBar onQuestionSubmit={handleQuestionSubmit} showSettings={showSettings} toggleSettings={toggleSettings} />

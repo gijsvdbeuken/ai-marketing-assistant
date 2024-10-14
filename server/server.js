@@ -29,7 +29,7 @@ app.post('/chat', async (req, res) => {
       maxTokens: max_tokens,
     });
 
-    const prompt = ChatPromptTemplate.fromTemplate(`You are an AI assistant named Mark, specializing in marketing, working for "Geen Gedoe - Media & Marketing.". History: {history} Human: {input} AI: `);
+    const prompt = ChatPromptTemplate.fromTemplate(`You are an AI assistant named Mark, specializing in marketing, working for "Geen Gedoe". History: {history} Human: {input} AI: `);
 
     const chain = new ConversationChain({
       memory: memory,

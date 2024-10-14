@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import ChatArea from './components/ChatArea/ChatArea';
 import SideBar from './components/SideBar/SideBar';
-import MenuBar from './components/MenuBar/MenuBar';
 
 function App() {
   const [question, setQuestion] = useState<string>('');
   const [answer, setAnswer] = useState<string>('');
   const [model, setModel] = useState<string>('');
   const [character, setCharacter] = useState<number>();
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(true);
 
   const toggleSidebar = () => {
@@ -22,7 +21,6 @@ function App() {
 
   const apiRequest = async () => {
     const message = question;
-    const temperature = 0.5;
     const max_tokens = 250;
     console.log('Message: ' + message);
     console.log('Temperature: ' + character);

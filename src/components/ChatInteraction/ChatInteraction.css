@@ -6,8 +6,8 @@
 
 .userMessage {
   display: flex;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
+  background-color: var(--faded-color);
+  color: var(--text-color);
   padding: 0px 20px;
   border-radius: 10px 0px 10px 10px;
   margin-top: 5px;
@@ -16,7 +16,7 @@
 .chatbotMessage {
   display: flex;
   background-color: transparent;
-  color: white;
+  color: var(--text-color);
   padding: 0px 20px;
   border-radius: 0px 10px 10px 10px;
   margin-top: 5px;
@@ -30,5 +30,18 @@
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--text-color-small);
+}
+
+.chatbotMessageThinking {
+  display: flex;
+  background-color: transparent;
+  color: var(--text-color);
+  padding: 0px 20px;
+  border-radius: 0px 10px 10px 10px;
+  margin-top: 5px;
+}
+
+.thinking {
+  color: var(--accent-color);
 }

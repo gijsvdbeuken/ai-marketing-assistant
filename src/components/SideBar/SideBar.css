@@ -22,15 +22,15 @@
   padding: 10px 20px;
   border: 2px solid transparent;
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.5);
+  background-color: var(--accent-color);
+  color: var(--text-color-dark);
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s, border 0.3s;
+  transition: background-color 0.3s;
 }
 
 .newChatButton:hover {
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid var(--hover-outline-color);
 }
 
 .toggleButton {
@@ -71,8 +71,8 @@
   padding: 10px 20px;
   border: 2px solid transparent;
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.5);
+  background-color: var(--faded-color);
+  color: var(--faded-text-color);
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s, border 0.3s;

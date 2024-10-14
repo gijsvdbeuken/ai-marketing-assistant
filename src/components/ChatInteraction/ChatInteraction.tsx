@@ -19,11 +19,18 @@ export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answ
         ) : null}
       </div>
       <div className="chatbotResponse">
-        {answer ? (
+        {answer == 'Aan het nadenken...' ? (
+          <div className="chatbotMessageThinking">
+            <p className="thinking">
+              <i className="fa-solid fa-wand-magic-sparkles"></i>&nbsp;
+              {answer}
+            </p>
+          </div>
+        ) : (
           <div className="chatbotMessage">
             <p>{answer}</p>
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );

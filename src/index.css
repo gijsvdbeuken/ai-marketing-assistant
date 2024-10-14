@@ -1,3 +1,19 @@
+:root {
+  /*Global*/
+  --bg-color: #242424;
+  --accent-color: #e5e3ff;
+
+  /*Text*/
+  --text-color: white;
+  --text-color-dark: #4f42ff;
+  --faded-text-color: rgba(255, 255, 255, 0.5);
+  --text-color-small: rgba(255, 255, 255, 0.25);
+
+  /*Other*/
+  --hover-outline-color: rgba(255, 255, 255, 0.5);
+  --faded-color: rgba(255, 255, 255, 0.1);
+}
+
 @font-face {
   font-family: 'Poppins';
   src: url('./assets/fonts/Poppins-SemiBold.ttf') format('truetype');
@@ -26,7 +42,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #113676;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -49,14 +65,14 @@ h1 {
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 14px;
-  color: rgba(255, 255, 255);
+  color: var(--text-color);
 }
 
 label {
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--faded-text-color);
 }
 
 select {
@@ -69,18 +85,18 @@ select {
   height: 50px;
   padding: 10px;
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--faded-color);
   margin-top: 10px;
   margin-bottom: 10px;
-  border: 2px solid #ffffff80;
 }
 
 p {
   font-family: 'Poppins';
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 14px;
   text-align: start;
   line-height: 1.8em;
+  color: var(--text-color);
 }
 
 .App {
@@ -89,7 +105,7 @@ p {
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-color: rgb(32, 32, 32);
+  background-color: var(--bg-color);
 }
 
 .appContent {
@@ -117,7 +133,7 @@ p {
   margin: 10px 0;
   border: 2px solid transparent;
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
+  background-color: var(--faded-color);
+  color: var(--text-color);
   transition: background-color 0.3s, border 0.3s;
 }
