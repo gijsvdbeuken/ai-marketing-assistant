@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import ChatArea from './components/ChatArea/ChatArea';
 import SideBar from './components/SideBar/SideBar';
-import StoredChat from './components/StoredChat/StoredChat';
 import MenuBar from './components/MenuBar/MenuBar';
 
 function App() {
@@ -10,10 +9,15 @@ function App() {
   const [answer, setAnswer] = useState<string>('');
   const [model, setModel] = useState<string>('');
   const [character, setCharacter] = useState<number>();
-  const [sideBarIsOpen, setSideBarIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [showSettings, setShowSettings] = useState<boolean>(true);
 
   const toggleSidebar = () => {
-    setSideBarIsOpen(!sideBarIsOpen);
+    setIsOpen(!isOpen);
+  };
+
+  const toggleSettings = () => {
+    setShowSettings(!showSettings);
   };
 
   const apiRequest = async () => {
@@ -63,9 +67,9 @@ function App() {
   return (
     <div className="App">
       <div className="appContent">
-        <SideBar></SideBar>
+        <SideBar isOpen={isOpen} toggleSidebar={toggleSidebar}></SideBar>
         <div className="chatAreaContainer">
-          <ChatArea onQuestionSubmit={handleQuestionChange} answer={answer} question={question} />
+          <ChatArea onQuestionSubmit={handleQuestionChange} answer={answer} question={question} showSettings={showSettings} toggleSettings={toggleSettings} />
         </div>
       </div>
     </div>

@@ -1,9 +1,85 @@
 .sideBar {
-  width: 300px;
+  width: 400px;
   background-color: rgb(23, 23, 23);
   transition: width 0.3s ease;
+  padding: 10px;
 }
 
-.sidebar.closed {
-  width: 60px;
+.sideBarCollapsed {
+  padding: 10px;
+  background-color: rgb(23, 23, 23);
+  transition: width 0.3s ease;
+  width: 50px;
+}
+
+.newChatButton {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 14px;
+  box-sizing: border-box;
+  width: 100%;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+.newChatButton:hover {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.toggleButton {
+  min-width: 45px;
+  max-width: 45px;
+  height: 45px;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 14px;
+  box-sizing: border-box;
+  display: inline-block;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+.toggleButton:hover {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.currentChat {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 14px;
+  box-sizing: border-box;
+  width: 100%;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+.chatHistory {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
