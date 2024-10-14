@@ -1,19 +1,19 @@
 @font-face {
-  font-family: "Poppins";
-  src: url("./assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Poppins";
-  src: url("./assets/fonts/Poppins-Medium.ttf") format("truetype");
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 
 :root {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   line-height: 1.5;
   font-weight: 400;
 
@@ -29,48 +29,46 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-input {
-  border: none;
-  outline: none;
-  box-sizing: border-box;
-  border: none;
-  height: 60px;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.08);
-  font-family: "Poppins";
+h1 {
+  font-family: 'Poppins';
   font-weight: 500;
   font-size: 16px;
-  padding: 20px;
-  color: white;
-  border-radius: 30px;
+  color: rgba(255, 255, 255);
 }
 
 label {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-weight: 500;
-  color: white;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 select {
-  font-family: "Poppins";
+  box-sizing: border-box;
+  border-style: none;
+  font-family: 'Poppins';
   font-weight: 500;
   font-size: 16px;
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #ffffff80;
 }
 
 p {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-weight: 500;
   font-size: 16px;
   text-align: start;
@@ -79,112 +77,38 @@ p {
 .App {
   display: flex;
   justify-content: center;
-  height: 100vh;
-  background-color: #171717;
-}
-
-.chatArea {
-  display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  box-sizing: border-box;
+  align-items: center;
   height: 100vh;
-  width: 800px;
-  min-height: 0;
+  background-color: rgb(34, 34, 34);
 }
 
-.chatAreaScroller {
-  flex-grow: 1;
-  overflow-y: auto; /* This makes the content scrollable */
-  min-height: 0;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
-
-.chatAreaScroller::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, and Opera */
-}
-
-.chatBar {
-  box-sizing: border-box;
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  padding: 10px;
-  border-radius: 40px;
-  width: 100%;
-  margin-bottom: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
-  margin-top: 10px;
-}
-
-.prompt {
+.appContent {
   display: flex;
   flex-direction: row;
-  gap: 10px;
-}
-
-.chatBarOptions {
-  display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   width: 100%;
-  padding-top: 10px;
-  gap: 10px;
 }
 
-.chatBarOption {
+.chatAreaContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  width: 25%;
-}
-
-.chatBarSelector {
-  border: none;
-  outline: none;
-  height: 60px;
+  justify-content: center;
   width: 100%;
-  border-radius: 30px;
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.25);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.15);
 }
 
-.submitButton {
-  border: none;
-  outline: none;
-  width: 65px;
-  height: 60px;
-  border-radius: 30px;
-  font-family: "Poppins";
+.modelInput {
+  font-family: 'Poppins';
   font-weight: 500;
-  font-size: 16px;
-  color: black;
-  background-color: white;
-  cursor: pointer;
-}
-
-.userRequest {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.userMessage {
-  display: flex;
-  background-color: rgba(255, 255, 255, 0.35);
+  font-size: 14px;
+  text-align: left;
+  box-sizing: border-box;
+  width: 25%;
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
   color: white;
-  padding: 5px 20px;
-  border-radius: 25px;
-}
-
-.chatbotMessage {
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 5px 20px;
-  border-radius: 25px;
-  margin-top: 10px;
-}
-
-.chatInteraction {
-  margin-top: 20px;
+  transition: background-color 0.3s, border 0.3s;
 }

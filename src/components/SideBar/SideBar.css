@@ -1,0 +1,9 @@
+.sideBar {
+  width: 300px;
+  background-color: rgb(23, 23, 23);
+  transition: width 0.3s ease;
+}
+
+.sidebar.closed {
+  width: 60px;
+}

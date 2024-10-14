@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import ChatArea from './components/ChatArea';
+import ChatArea from './components/ChatArea/ChatArea';
+import SideBar from './components/SideBar/SideBar';
+import StoredChat from './components/StoredChat/StoredChat';
+import MenuBar from './components/MenuBar/MenuBar';
 
 function App() {
   const [question, setQuestion] = useState<string>('');
   const [answer, setAnswer] = useState<string>('');
+  const [model, setModel] = useState<string>('');
+  const [character, setCharacter] = useState<number>();
+  const [sideBarIsOpen, setSideBarIsOpen] = useState<boolean>(true);
+
+  const toggleSidebar = () => {
+    setSideBarIsOpen(!sideBarIsOpen);
+  };
 
   const apiRequest = async () => {
     const message = question;
-    const model = 'gpt-4o-mini';
     const temperature = 0.5;
     const max_tokens = 250;
+    console.log('Message: ' + message);
+    console.log('Temperature: ' + character);
+    console.log('Max Tokens: ' + max_tokens);
+    console.log('Model: ' + model);
     try {
       const response = await fetch('http://localhost:3001/chat', {
         method: 'POST',
@@ -20,12 +33,12 @@ function App() {
         body: JSON.stringify({
           message,
           model,
-          temperature,
+          character,
           max_tokens,
         }),
       });
       const answerResponse = await response.json();
-      setAnswer(answerResponse.content); // Set the answer after the API response
+      setAnswer(answerResponse.content);
     } catch (error) {
       setAnswer('Server niet bereikbaar: ' + error);
       console.error(error);
@@ -33,19 +46,28 @@ function App() {
   };
 
   useEffect(() => {
-    if (question.trim() !== '') {
-      apiRequest(); // Trigger API call when question is set
+    if (question && model) {
+      if (question.trim() !== '') {
+        apiRequest();
+      }
     }
-  }, [question]);
+  }, [question, model]);
 
-  const handleQuestionChange = (newQuestion: string) => {
-    setQuestion(newQuestion); // Set the new question on question change
-    setAnswer(''); // Clear the previous answer
+  const handleQuestionChange = (newQuestion: string, _newTime: string, newModel: string, newCharacter: number) => {
+    setQuestion(newQuestion);
+    setModel(newModel);
+    setCharacter(newCharacter);
+    setAnswer('');
   };
 
   return (
     <div className="App">
-      <ChatArea onQuestionChange={handleQuestionChange} answer={answer} question={question} />
+      <div className="appContent">
+        <SideBar></SideBar>
+        <div className="chatAreaContainer">
+          <ChatArea onQuestionSubmit={handleQuestionChange} answer={answer} question={question} />
+        </div>
+      </div>
     </div>
   );
 }

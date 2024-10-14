@@ -1,0 +1,130 @@
+.chatBar {
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  padding: 5px;
+  border-radius: 40px;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.searchBar {
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  border: none;
+  height: 40px;
+  width: 100%;
+  background-color: transparent;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 16px;
+  padding: 20px;
+  color: white;
+  border-radius: 30px;
+}
+
+.prompt {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.chatBarOptions {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 10px;
+  gap: 10px;
+}
+
+.chatBarOption {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 20%;
+}
+
+.chatBarSelector {
+  border: none;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  border-radius: 30px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.submitButton {
+  border: none;
+  outline: none;
+  width: 45px;
+  height: 40px;
+  border-radius: 50%;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 16px;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+  padding: 0;
+  text-align: center;
+}
+
+.submitButton:disabled {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.25);
+  cursor: default;
+}
+
+.custom-button {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 14px;
+  box-sizing: border-box;
+  width: 100%;
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+.custom-button input[type='radio'] {
+  display: none;
+}
+
+.custom-button.active {
+  color: black;
+  font-weight: 600;
+  background-color: white;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+}
+
+.modelOptions {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.lineBreak {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 5px;
+}
