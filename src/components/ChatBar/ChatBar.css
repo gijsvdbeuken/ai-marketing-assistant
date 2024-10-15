@@ -145,17 +145,30 @@
 }
 
 .toggleSettingsButton {
+  display: flex;
+  align-items: center;
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 14px;
   border: transparent;
   color: var(--text-color);
-  background-color: transparent;
+  background-color: var(--faded-color);
+  border-radius: 5px;
+  padding: 0px 20px;
   cursor: pointer;
   margin-bottom: 10px;
+  height: 45px;
+  width: 140px;
 }
 
-.knowledge {
+.clientKnowledge {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 50%;
+}
+
+.knowledgeOptions {
   border: none;
   font-family: 'Poppins';
   font-weight: 500;
@@ -170,4 +183,44 @@
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s, border 0.3s;
+}
+
+.fileInput {
+  border: none;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 14px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  width: 100%;
+  height: 45px;
+  background-color: var(--faded-color);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.knowledgeTypes {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.companyKnowledge {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+}
+
+.otherKnowledge {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
 }

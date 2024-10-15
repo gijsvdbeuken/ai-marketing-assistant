@@ -45,3 +45,7 @@
 .thinking {
   color: var(--accent-color);
 }
+
+.showSettingsParagraph {
+  color: var(--faded-color);
+}

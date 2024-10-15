@@ -5,16 +5,17 @@ interface ChatInteractionProps {
   question: string;
   answer: string;
   time: string;
+  showSettings: boolean;
 }
 
-export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answer, time }) => {
+export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answer, time, showSettings }) => {
   return (
     <div className="chatInteraction">
       <small className="interactionTime">Om {time}</small>
       <div className="userRequest">
         {question ? (
           <div className="userMessage">
-            <p>{question}</p>
+            <p className={showSettings == true ? 'showSettingsParagraph' : ''}>{question}</p>
           </div>
         ) : null}
       </div>
@@ -28,7 +29,7 @@ export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answ
           </div>
         ) : (
           <div className="chatbotMessage">
-            <p>{answer}</p>
+            <p className={showSettings == true ? 'showSettingsParagraph' : ''}>{answer}</p>
           </div>
         )}
       </div>

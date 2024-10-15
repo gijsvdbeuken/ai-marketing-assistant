@@ -10,6 +10,7 @@ function App() {
   const [character, setCharacter] = useState<number>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(true);
+  const [knowledge, setKnowledge] = useState<string>('');
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -37,6 +38,7 @@ function App() {
           model,
           character,
           max_tokens,
+          knowledge,
         }),
       });
       const answerResponse = await response.json();
@@ -55,10 +57,11 @@ function App() {
     }
   }, [question, model]);
 
-  const handleQuestionChange = (newQuestion: string, _newTime: string, newModel: string, newCharacter: number) => {
+  const handleQuestionChange = (newQuestion: string, _newTime: string, newModel: string, newCharacter: number, newKnowledge: string) => {
     setQuestion(newQuestion);
     setModel(newModel);
     setCharacter(newCharacter);
+    setKnowledge(newKnowledge);
     setAnswer('');
   };
 

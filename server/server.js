@@ -1,11 +1,9 @@
 import express from 'express';
-//import OpenAI from 'openai';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { BufferMemory } from 'langchain/memory';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ConversationChain } from 'langchain/chains';
-//import { ChatOpenAI } from 'langchain/chat_models/openai';
 import { ChatOpenAI } from '@langchain/openai';
 
 dotenv.config();
@@ -20,7 +18,7 @@ const memory = new BufferMemory({ returnMessages: true, memoryKey: 'history' });
 
 app.post('/chat', async (req, res) => {
   try {
-    const { message, model, temperature, max_tokens } = req.body;
+    const { message, model, temperature, max_tokens, knowledge } = req.body;
 
     const chatModel = new ChatOpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
@@ -29,7 +27,15 @@ app.post('/chat', async (req, res) => {
       maxTokens: max_tokens,
     });
 
-    const prompt = ChatPromptTemplate.fromTemplate(`You are an AI assistant named Mark, specializing in marketing, working for "Geen Gedoe". History: {history} Human: {input} AI: `);
+    function replace_braces(text) {
+      return text.replace(/{/g, '{{').replace(/}/g, '}}');
+    }
+
+    const x = replace_braces(knowledge);
+
+    const promptTemplate = `You are an AI assistant named Mark, specializing in marketing, working for Geen Gedoe. You will be working with this data: ` + x + `. History: {history} Human: {input} AI:`;
+
+    const prompt = ChatPromptTemplate.fromTemplate(promptTemplate);
 
     const chain = new ConversationChain({
       memory: memory,
@@ -37,7 +43,9 @@ app.post('/chat', async (req, res) => {
       llm: chatModel,
     });
 
-    const response = await chain.call({ input: message });
+    const response = await chain.call({
+      input: message,
+    });
 
     res.json({ content: response.response });
   } catch (error) {

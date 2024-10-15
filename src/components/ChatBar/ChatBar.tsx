@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './ChatBar.css';
+import jsonData from '../../data/geen-gedoe.json';
 
 interface ChatBarProps {
-  onQuestionSubmit: (question: string, time: string, model: string, character: number) => void;
+  onQuestionSubmit: (question: string, time: string, model: string, character: number, knowledge: string) => void;
   showSettings: boolean;
   toggleSettings: () => void;
 }
@@ -11,6 +12,7 @@ const ChatBar: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggl
   const [questionInput, setQuestionInput] = useState<string>('');
   const [model, setModel] = useState<string>('gpt-4o-mini');
   const [character, setCharacter] = useState<string>('nuanced');
+  const [knowledge, setKnowledge] = useState<string>('geen');
 
   const getCurrentTime = () => {
     const now = new Date();
@@ -22,7 +24,9 @@ const ChatBar: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggl
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+
     const time = getCurrentTime();
+
     let temperature = 0.5;
     if (character === 'analytical') {
       temperature = 0.2;
@@ -31,7 +35,16 @@ const ChatBar: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggl
     } else if (character === 'creative') {
       temperature = 0.8;
     }
-    onQuestionSubmit(questionInput, time, model, temperature);
+
+    let x = '';
+    if (knowledge !== 'geen') {
+      if (knowledge === 'geen-gedoe') {
+        x = JSON.stringify(jsonData);
+        //console.log(x);
+      }
+    }
+
+    onQuestionSubmit(questionInput, time, model, temperature, x);
     setQuestionInput('');
   };
 
@@ -46,6 +59,9 @@ const ChatBar: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggl
             value={questionInput}
             onChange={(e) => {
               setQuestionInput(e.target.value);
+              if (showSettings == true) {
+                toggleSettings();
+              }
             }}
           ></input>
           <button className="submitButton" type={'submit'} disabled={questionInput.trim() === ''}>
@@ -54,15 +70,9 @@ const ChatBar: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggl
         </div>
       </form>
       <button className="toggleSettingsButton" onClick={toggleSettings}>
-        {showSettings ? (
-          <>
-            <i className="fas fa-chevron-down"></i>
-          </>
-        ) : (
-          <>
-            <i className="fas fa-chevron-up"></i>
-          </>
-        )}
+        <h1>
+          <i className="fa-solid fa-bars-progress"></i> Instellingen
+        </h1>
       </button>
 
       <div className={showSettings ? 'options' : 'optionsCollapsed'}>
@@ -106,16 +116,31 @@ const ChatBar: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggl
               </label>
             </div>
             <div className="lineBreak"></div>
-            <h1>Intelligentie en gedrag</h1>
-
-            <label>Kennis</label>
-            <select className="knowledge">
-              <option>Geen Gedoe | Media & Marketing</option>
-              <option>Eleven Travel</option>
-              <option>Loo Mare</option>
-              <option>Jade Styling</option>
-              <option>Aiki Sports</option>
-            </select>
+            <h1>Geheugen</h1>
+            <div className="knowledgeTypes">
+              <div className="companyKnowledge">
+                <label>Bedrijfskennis</label>
+                <select className="knowledgeOptions" onChange={(e) => setKnowledge(e.target.value)}>
+                  <option value="geen">Geen</option>
+                  <option value="geen-gedoe">Geen Gedoe</option>
+                  <option value="eleven-travel">Eleven Travel</option>
+                  <option value="loo-mare">Loo Mare</option>
+                  <option value="jade-styling">Jade Styling</option>
+                  <option value="aiki-sports">Aiki Sports</option>
+                </select>
+              </div>
+              <div className="otherKnowledge">
+                <label>Overige kennis</label>
+                <select className="knowledgeOptions">
+                  <option value="geen">Geen</option>
+                  <option value="geen-gedoe">Geen Gedoe</option>
+                  <option value="eleven-travel">Eleven Travel</option>
+                  <option value="loo-mare">Loo Mare</option>
+                  <option value="jade-styling">Jade Styling</option>
+                  <option value="aiki-sports">Aiki Sports</option>
+                </select>
+              </div>
+            </div>
           </>
         ) : null}
       </div>
