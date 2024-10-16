@@ -6,14 +6,16 @@ import SideBar from './components/SideBar/SideBar';
 function App() {
   const [question, setQuestion] = useState<string>('');
   const [answer, setAnswer] = useState<string>('');
+
   const [model, setModel] = useState<string>('');
-  const [character, setCharacter] = useState<number>();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [originality, setOriginality] = useState<number>();
+  const [corpus, setCorpus] = useState<string>('');
+
+  const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(true);
-  const [knowledge, setKnowledge] = useState<string>('');
 
   const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+    setShowSidebar(!showSidebar);
   };
 
   const toggleSettings = () => {
@@ -22,11 +24,13 @@ function App() {
 
   const apiRequest = async () => {
     const message = question;
-    const max_tokens = 250;
+    const max_tokens = 10000;
+
     console.log('Message: ' + message);
-    console.log('Temperature: ' + character);
+    console.log('Temperature: ' + originality);
     console.log('Max Tokens: ' + max_tokens);
     console.log('Model: ' + model);
+
     try {
       const response = await fetch('http://localhost:3001/chat', {
         method: 'POST',
@@ -36,9 +40,9 @@ function App() {
         body: JSON.stringify({
           message,
           model,
-          character,
+          originality,
           max_tokens,
-          knowledge,
+          corpus,
         }),
       });
       const answerResponse = await response.json();
@@ -57,18 +61,18 @@ function App() {
     }
   }, [question, model]);
 
-  const handleQuestionChange = (newQuestion: string, _newTime: string, newModel: string, newCharacter: number, newKnowledge: string) => {
-    setQuestion(newQuestion);
-    setModel(newModel);
-    setCharacter(newCharacter);
-    setKnowledge(newKnowledge);
+  const handleQuestionChange = (question: string, _newTime: string, model: string, originality: number, corpus: string) => {
+    setQuestion(question);
+    setModel(model);
+    setOriginality(originality);
+    setCorpus(corpus);
     setAnswer('');
   };
 
   return (
     <div className="App">
       <div className="appContent">
-        <SideBar isOpen={isOpen} toggleSidebar={toggleSidebar}></SideBar>
+        <SideBar isOpen={showSidebar} toggleSidebar={toggleSidebar}></SideBar>
         <div className="chatAreaContainer">
           <ChatArea onQuestionSubmit={handleQuestionChange} answer={answer} question={question} showSettings={showSettings} toggleSettings={toggleSettings} />
         </div>

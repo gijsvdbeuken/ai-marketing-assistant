@@ -1,14 +1,12 @@
 .sideBar {
-  width: 400px;
+  width: 300px;
   background-color: rgb(23, 23, 23);
-  transition: width 0.3s ease;
   padding: 10px;
 }
 
 .sideBarCollapsed {
   padding: 10px;
-  background-color: rgb(23, 23, 23);
-  transition: width 0.3s ease;
+  background-color: transparent;
   width: 50px;
 }
 

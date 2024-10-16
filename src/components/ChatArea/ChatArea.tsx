@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ChatBar from '../ChatBar/ChatBar';
+import ChatConfiguration from '../ChatConfiguration/ChatConfiguration';
 import { ChatInteraction } from '../ChatInteraction/ChatInteraction';
 import './ChatArea.css';
 
@@ -12,7 +12,7 @@ interface ChatAreaProps {
 }
 
 const ChatArea: React.FC<ChatAreaProps> = ({ onQuestionSubmit, answer, question, showSettings, toggleSettings }) => {
-  const [interactions, setInteractions] = useState<{ question: string; answer: string | null; time: string; model: string; character: number; knowledge: string }[]>([]);
+  const [interactions, setInteractions] = useState<{ question: string; answer: string | null; time: string; model: string; originality: number; corpus: string }[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
@@ -24,9 +24,9 @@ const ChatArea: React.FC<ChatAreaProps> = ({ onQuestionSubmit, answer, question,
     }
   };
 
-  const handleQuestionSubmit = (newQuestion: string, newTime: string, newModel: string, newCharacter: number, newKnowledge: string) => {
-    setInteractions((prevInteractions) => [...prevInteractions, { question: newQuestion, answer: null, time: newTime, model: newModel, character: newCharacter, knowledge: newKnowledge }]);
-    onQuestionSubmit(newQuestion, newTime, newModel, newCharacter, newKnowledge);
+  const handleQuestionSubmit = (question: string, time: string, model: string, originality: number, corpus: string) => {
+    setInteractions((prevInteractions) => [...prevInteractions, { question: question, answer: 'Aan het nadenken...', time: time, model: model, originality: originality, corpus: corpus }]);
+    onQuestionSubmit(question, time, model, originality, corpus);
     scrollToBottom();
   };
 
@@ -34,7 +34,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ onQuestionSubmit, answer, question,
     if (answer) {
       setInteractions((prevInteractions) => {
         const lastInteraction = prevInteractions[prevInteractions.length - 1];
-        if (lastInteraction && lastInteraction.answer === null) {
+        if (lastInteraction && lastInteraction.answer === 'Aan het nadenken...') {
           const updatedInteractions = [...prevInteractions];
           updatedInteractions[updatedInteractions.length - 1] = {
             ...lastInteraction,
@@ -51,10 +51,10 @@ const ChatArea: React.FC<ChatAreaProps> = ({ onQuestionSubmit, answer, question,
     <div className="chatArea">
       <div className="chatAreaScroller">
         {interactions.map((interaction, index) => (
-          <ChatInteraction key={index} question={interaction.question} answer={interaction.answer || 'Aan het nadenken...'} time={interaction.time} showSettings={showSettings} />
+          <ChatInteraction key={index} question={interaction.question} answer={interaction.answer || ''} time={interaction.time} showSettings={showSettings} />
         ))}
       </div>
-      <ChatBar onQuestionSubmit={handleQuestionSubmit} showSettings={showSettings} toggleSettings={toggleSettings} />
+      <ChatConfiguration onQuestionSubmit={handleQuestionSubmit} showSettings={showSettings} toggleSettings={toggleSettings} />
     </div>
   );
 };

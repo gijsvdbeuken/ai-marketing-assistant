@@ -1,11 +1,11 @@
 :root {
   /*Global*/
   --bg-color: #242424;
-  --accent-color: #e5e3ff;
+  --accent-color: white;
 
   /*Text*/
   --text-color: white;
-  --text-color-dark: #4f42ff;
+  --text-color-dark: black;
   --faded-text-color: rgba(255, 255, 255, 0.5);
   --text-color-small: rgba(255, 255, 255, 0.25);
 
@@ -64,7 +64,14 @@ code {
 h1 {
   font-family: 'Poppins';
   font-weight: 500;
-  font-size: 14px;
+  font-size: 24px;
+  color: var(--text-color);
+}
+
+h2 {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 20px;
   color: var(--text-color);
 }
 

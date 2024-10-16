@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import './ChatBar.css';
+import './ChatConfiguration.css';
 import jsonData from '../../data/geen-gedoe.json';
 
 interface ChatBarProps {
-  onQuestionSubmit: (question: string, time: string, model: string, character: number, knowledge: string) => void;
+  onQuestionSubmit: (question: string, time: string, model: string, originality: number, corpus: string) => void;
   showSettings: boolean;
   toggleSettings: () => void;
 }
 
-const ChatBar: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggleSettings }) => {
-  const [questionInput, setQuestionInput] = useState<string>('');
-  const [model, setModel] = useState<string>('gpt-4o-mini');
-  const [character, setCharacter] = useState<string>('nuanced');
-  const [knowledge, setKnowledge] = useState<string>('geen');
+const ChatConfiguration: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggleSettings }) => {
+  const [question, setQuestion] = useState<string>('');
 
-  const getCurrentTime = () => {
+  const [model, setModel] = useState<string>('gpt-4o-mini');
+  const [originality, setOriginality] = useState<string>('genuanceerd');
+  const [corpus, setCorpus] = useState<string>('geen');
+
+  const getTime = () => {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
@@ -22,65 +23,65 @@ const ChatBar: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggl
     return time;
   };
 
+  const getTemperature = () => {
+    let temperature = 0.5;
+    if (originality === 'voorspelbaar') {
+      temperature = 0.2;
+    } else if (originality === 'genuanceerd') {
+      temperature = 0.5;
+    } else if (originality === 'creatief') {
+      temperature = 0.8;
+    }
+    return temperature;
+  };
+
+  const getCorpus = () => {
+    let stringifiedCorpus = '';
+    if (corpus !== 'geen') {
+      if (corpus === 'geen-gedoe') {
+        stringifiedCorpus = JSON.stringify(jsonData);
+        return stringifiedCorpus;
+      }
+    }
+    return stringifiedCorpus;
+  };
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const time = getCurrentTime();
+    const time = getTime();
+    const temperature = getTemperature();
+    const corpus = getCorpus();
 
-    let temperature = 0.5;
-    if (character === 'analytical') {
-      temperature = 0.2;
-    } else if (character === 'nuanced') {
-      temperature = 0.5;
-    } else if (character === 'creative') {
-      temperature = 0.8;
-    }
-
-    let x = '';
-    if (knowledge !== 'geen') {
-      if (knowledge === 'geen-gedoe') {
-        x = JSON.stringify(jsonData);
-        //console.log(x);
-      }
-    }
-
-    onQuestionSubmit(questionInput, time, model, temperature, x);
-    setQuestionInput('');
+    onQuestionSubmit(question, time, model, temperature, corpus);
+    setQuestion('');
   };
 
   return (
-    <>
+    <div className="chatConfiguration">
       <form onSubmit={handleSubmit} className="chatBar">
         <div className="prompt">
+          <button className="settingsButton" onClick={toggleSettings}>
+            <i className="fa-solid fa-bars"></i>
+          </button>
           <input
             className="searchBar"
             placeholder="Vraag iets aan Mark..."
             type="text"
-            value={questionInput}
+            value={question}
             onChange={(e) => {
-              setQuestionInput(e.target.value);
-              if (showSettings == true) {
-                toggleSettings();
-              }
+              setQuestion(e.target.value);
             }}
           ></input>
-          <button className="submitButton" type={'submit'} disabled={questionInput.trim() === ''}>
+          <button className="submitButton" type={'submit'} disabled={question.trim() === ''}>
             <i className="fa-solid fa-arrow-up"></i>
           </button>
         </div>
       </form>
-      <button className="toggleSettingsButton" onClick={toggleSettings}>
-        <h1>
-          <i className="fa-solid fa-bars-progress"></i> Instellingen
-        </h1>
-      </button>
-
-      <div className={showSettings ? 'options' : 'optionsCollapsed'}>
+      <div className="options">
         {showSettings ? (
           <>
-            <div className="lineBreak"></div>
-            <h1>Intelligentie en gedrag</h1>
-
+            <label className="title">Parameters</label>
             <label>Model</label>
             <div className="modelOptions">
               <label className={`custom-button ${model === 'gpt-3.5-turbo' ? 'active' : ''}`}>
@@ -100,27 +101,27 @@ const ChatBar: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggl
                 GPT-4o
               </label>
             </div>
-            <label>Karakter</label>
+            <label>Originaliteit</label>
             <div className="modelOptions">
-              <label className={`custom-button ${character === 'analytical' ? 'active' : ''}`}>
-                <input type="radio" value="analytical" checked={character === 'analytical'} onChange={(e) => setCharacter(e.target.value)} />
-                Analytisch
+              <label className={`custom-button ${originality === 'voorspelbaar' ? 'active' : ''}`}>
+                <input type="radio" value="voorspelbaar" checked={originality === 'voorspelbaar'} onChange={(e) => setOriginality(e.target.value)} />
+                Voorspelbaar
               </label>
-              <label className={`custom-button ${character === 'nuanced' ? 'active' : ''}`}>
-                <input type="radio" value="nuanced" checked={character === 'nuanced'} onChange={(e) => setCharacter(e.target.value)} />
+              <label className={`custom-button ${originality === 'genuanceerd' ? 'active' : ''}`}>
+                <input type="radio" value="genuanceerd" checked={originality === 'genuanceerd'} onChange={(e) => setOriginality(e.target.value)} />
                 Genuanceerd
               </label>
-              <label className={`custom-button ${character === 'creative' ? 'active' : ''}`}>
-                <input type="radio" value="creative" checked={character === 'creative'} onChange={(e) => setCharacter(e.target.value)} />
+              <label className={`custom-button ${originality === 'creatief' ? 'active' : ''}`}>
+                <input type="radio" value="creatief" checked={originality === 'creatief'} onChange={(e) => setOriginality(e.target.value)} />
                 Creatief
               </label>
             </div>
             <div className="lineBreak"></div>
-            <h1>Geheugen</h1>
-            <div className="knowledgeTypes">
-              <div className="companyKnowledge">
-                <label>Bedrijfskennis</label>
-                <select className="knowledgeOptions" onChange={(e) => setKnowledge(e.target.value)}>
+            <label className="title">Corpus</label>
+            <div className="corpusTypes">
+              <div className="companyCorpus">
+                <label>Presets</label>
+                <select className="corpusOptions" onChange={(e) => setCorpus(e.target.value)}>
                   <option value="geen">Geen</option>
                   <option value="geen-gedoe">Geen Gedoe</option>
                   <option value="eleven-travel">Eleven Travel</option>
@@ -129,9 +130,9 @@ const ChatBar: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggl
                   <option value="aiki-sports">Aiki Sports</option>
                 </select>
               </div>
-              <div className="otherKnowledge">
-                <label>Overige kennis</label>
-                <select className="knowledgeOptions">
+              <div className="otherCorpus">
+                <label>Overig</label>
+                <select className="corpusOptions">
                   <option value="geen">Geen</option>
                   <option value="geen-gedoe">Geen Gedoe</option>
                   <option value="eleven-travel">Eleven Travel</option>
@@ -144,8 +145,8 @@ const ChatBar: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggl
           </>
         ) : null}
       </div>
-    </>
+    </div>
   );
 };
 
-export default ChatBar;
+export default ChatConfiguration;

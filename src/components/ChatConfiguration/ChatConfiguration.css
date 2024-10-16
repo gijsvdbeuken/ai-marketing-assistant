@@ -1,3 +1,9 @@
+.chatConfiguration {
+  padding: 0px 10px;
+  background-color: rgb(28, 28, 28);
+  border-radius: 35px 35px 0px 0px;
+}
+
 .chatBar {
   box-sizing: border-box;
   border: 2px solid transparent;
@@ -20,7 +26,7 @@
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 14px;
-  padding: 20px;
+  padding: 20px 0px;
   color: var(--text-color);
   border-radius: 30px;
 }
@@ -28,7 +34,6 @@
 .prompt {
   display: flex;
   flex-direction: row;
-  gap: 10px;
 }
 
 .chatBarOptions {
@@ -126,9 +131,9 @@
   flex-direction: column;
   align-items: start;
   width: 100%;
-  height: auto;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
   max-height: 500px;
-  transition: height 0.3s;
 }
 
 .modelOptions {
@@ -144,21 +149,21 @@
   margin-bottom: 7.5px;
 }
 
-.toggleSettingsButton {
-  display: flex;
-  align-items: center;
+.settingsButton {
+  border: 2px solid transparent;
+  border: none;
+  outline: none;
+  width: 45px;
+  height: 40px;
+  border-radius: 50%;
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 14px;
-  border: transparent;
   color: var(--text-color);
-  background-color: var(--faded-color);
-  border-radius: 5px;
-  padding: 0px 20px;
   cursor: pointer;
-  margin-bottom: 10px;
-  height: 45px;
-  width: 140px;
+  padding: 0;
+  text-align: center;
+  background-color: transparent;
 }
 
 .clientKnowledge {
@@ -168,7 +173,7 @@
   width: 50%;
 }
 
-.knowledgeOptions {
+.corpusOptions {
   border: none;
   font-family: 'Poppins';
   font-weight: 500;
@@ -203,7 +208,7 @@
   padding: 10px;
 }
 
-.knowledgeTypes {
+.corpusTypes {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -211,16 +216,21 @@
   width: 100%;
 }
 
-.companyKnowledge {
+.companyCorpus {
   display: flex;
   flex-direction: column;
   align-items: start;
   width: 100%;
 }
 
-.otherKnowledge {
+.otherCorpus {
   display: flex;
   flex-direction: column;
   align-items: start;
   width: 100%;
+}
+
+.title {
+  color: white;
+  font-size: 14px;
 }

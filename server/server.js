@@ -1,6 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+
+import { marked } from 'marked';
+import { JSDOM } from 'jsdom';
+import DOMPurify from 'dompurify';
+
 import { BufferMemory } from 'langchain/memory';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ConversationChain } from 'langchain/chains';
@@ -18,7 +23,7 @@ const memory = new BufferMemory({ returnMessages: true, memoryKey: 'history' });
 
 app.post('/chat', async (req, res) => {
   try {
-    const { message, model, temperature, max_tokens, knowledge } = req.body;
+    const { message, model, temperature, max_tokens, corpus } = req.body;
 
     const chatModel = new ChatOpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
@@ -31,7 +36,7 @@ app.post('/chat', async (req, res) => {
       return text.replace(/{/g, '{{').replace(/}/g, '}}');
     }
 
-    const x = replace_braces(knowledge);
+    const x = replace_braces(corpus);
 
     const promptTemplate = `You are an AI assistant named Mark, specializing in marketing, working for Geen Gedoe. You will be working with this data: ` + x + `. History: {history} Human: {input} AI:`;
 
@@ -47,7 +52,17 @@ app.post('/chat', async (req, res) => {
       input: message,
     });
 
-    res.json({ content: response.response });
+    // Convert response to Markdown and sanitize
+    const rawMarkdown = response.response; // Assuming this is in Markdown format
+    const formattedHTML = marked(rawMarkdown); // Convert Markdown to HTML
+
+    // Create a DOMPurify instance
+    const window = new JSDOM('').window; // Create a new DOM window
+    const purify = DOMPurify(window); // Initialize DOMPurify with the DOM window
+    const cleanHTML = purify.sanitize(formattedHTML); // Sanitize the HTML
+
+    // Send back the sanitized HTML response
+    res.json({ content: cleanHTML });
   } catch (error) {
     console.error('Error during chat completion:', error);
     res.status(500).json({

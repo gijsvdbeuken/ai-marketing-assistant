@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './ChatInteraction.css';
+import 'highlight.js/styles/github-dark.css';
+import hljs from 'highlight.js';
 
 interface ChatInteractionProps {
   question: string;
@@ -9,13 +11,20 @@ interface ChatInteractionProps {
 }
 
 export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answer, time, showSettings }) => {
+  useEffect(() => {
+    const codeBlocks = document.querySelectorAll('.chatbotMessage code');
+    codeBlocks.forEach((block) => {
+      hljs.highlightElement(block as HTMLElement);
+    });
+  }, [answer]);
+
   return (
     <div className="chatInteraction">
       <small className="interactionTime">Om {time}</small>
       <div className="userRequest">
         {question ? (
           <div className="userMessage">
-            <p className={showSettings == true ? 'showSettingsParagraph' : ''}>{question}</p>
+            <p>{question}</p>
           </div>
         ) : null}
       </div>
@@ -29,7 +38,7 @@ export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answ
           </div>
         ) : (
           <div className="chatbotMessage">
-            <p className={showSettings == true ? 'showSettingsParagraph' : ''}>{answer}</p>
+            <p dangerouslySetInnerHTML={{ __html: answer }} />
           </div>
         )}
       </div>
