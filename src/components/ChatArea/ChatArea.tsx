@@ -4,14 +4,14 @@ import { ChatInteraction } from '../ChatInteraction/ChatInteraction';
 import './ChatArea.css';
 
 interface ChatAreaProps {
-  onQuestionSubmit: (question: string, time: string, model: string, character: number, knowledge: string) => void;
+  handleNewRequest: (question: string, time: string, model: string, originality: number, corpus: string) => void;
   answer: string;
   question: string;
   showSettings: boolean;
   toggleSettings: () => void;
 }
 
-const ChatArea: React.FC<ChatAreaProps> = ({ onQuestionSubmit, answer, question, showSettings, toggleSettings }) => {
+const ChatArea: React.FC<ChatAreaProps> = ({ handleNewRequest, answer, question, showSettings, toggleSettings }) => {
   const [interactions, setInteractions] = useState<{ question: string; answer: string | null; time: string; model: string; originality: number; corpus: string }[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
@@ -26,7 +26,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ onQuestionSubmit, answer, question,
 
   const handleQuestionSubmit = (question: string, time: string, model: string, originality: number, corpus: string) => {
     setInteractions((prevInteractions) => [...prevInteractions, { question: question, answer: 'Aan het nadenken...', time: time, model: model, originality: originality, corpus: corpus }]);
-    onQuestionSubmit(question, time, model, originality, corpus);
+    handleNewRequest(question, time, model, originality, corpus);
     scrollToBottom();
   };
 
