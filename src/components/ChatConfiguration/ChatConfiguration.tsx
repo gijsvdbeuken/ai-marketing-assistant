@@ -1,39 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ChatConfiguration.css';
 import jsonData from '../../data/geen-gedoe.json';
+import { useTemperature } from '../../utilities/useTemperature';
+import { use } from 'marked';
 
-interface ChatBarProps {
-  onQuestionSubmit: (question: string, time: string, model: string, originality: number, corpus: string) => void;
-  showSettings: boolean;
-  toggleSettings: () => void;
+interface ChatConfigurationProps {
+  onQuestionSubmit: (question: string, model: string, originality: number, corpus: string) => void;
 }
 
-const ChatConfiguration: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSettings, toggleSettings }) => {
-  const [question, setQuestion] = useState<string>('');
+const ChatConfiguration: React.FC<ChatConfigurationProps> = ({ onQuestionSubmit }) => {
+  const [showSettings, setShowSettings] = useState<boolean>(true);
+  const toggleSettings = () => setShowSettings(!showSettings);
 
+  const [question, setQuestion] = useState<string>('');
   const [model, setModel] = useState<string>('gpt-4o-mini');
   const [originality, setOriginality] = useState<string>('genuanceerd');
   const [corpus, setCorpus] = useState<string>('geen');
 
-  const getTime = () => {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    let time = `${hours}:${minutes}`;
-    return time;
-  };
-
-  const getTemperature = () => {
-    let temperature = 0.5;
-    if (originality === 'voorspelbaar') {
-      temperature = 0.2;
-    } else if (originality === 'genuanceerd') {
-      temperature = 0.5;
-    } else if (originality === 'creatief') {
-      temperature = 0.8;
-    }
-    return temperature;
-  };
+  const { temperature } = useTemperature(originality);
 
   const getCorpus = () => {
     let stringifiedCorpus = '';
@@ -49,11 +33,9 @@ const ChatConfiguration: React.FC<ChatBarProps> = ({ onQuestionSubmit, showSetti
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const time = getTime();
-    const temperature = getTemperature();
     const corpus = getCorpus();
 
-    onQuestionSubmit(question, time, model, temperature, corpus);
+    onQuestionSubmit(question, model, temperature, corpus);
     setQuestion('');
   };
 

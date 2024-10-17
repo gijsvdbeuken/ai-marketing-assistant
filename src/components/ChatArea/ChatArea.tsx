@@ -4,15 +4,13 @@ import { ChatInteraction } from '../ChatInteraction/ChatInteraction';
 import './ChatArea.css';
 
 interface ChatAreaProps {
-  handleNewRequest: (question: string, time: string, model: string, originality: number, corpus: string) => void;
+  handleNewRequest: (question: string, model: string, originality: number, corpus: string) => void;
   answer: string;
   question: string;
-  showSettings: boolean;
-  toggleSettings: () => void;
 }
 
-const ChatArea: React.FC<ChatAreaProps> = ({ handleNewRequest, answer, question, showSettings, toggleSettings }) => {
-  const [interactions, setInteractions] = useState<{ question: string; answer: string | null; time: string; model: string; originality: number; corpus: string }[]>([]);
+const ChatArea: React.FC<ChatAreaProps> = ({ handleNewRequest, answer, question }) => {
+  const [interactions, setInteractions] = useState<{ question: string; answer: string | null; model: string; originality: number; corpus: string }[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
@@ -24,9 +22,9 @@ const ChatArea: React.FC<ChatAreaProps> = ({ handleNewRequest, answer, question,
     }
   };
 
-  const handleQuestionSubmit = (question: string, time: string, model: string, originality: number, corpus: string) => {
-    setInteractions((prevInteractions) => [...prevInteractions, { question: question, answer: 'Aan het nadenken...', time: time, model: model, originality: originality, corpus: corpus }]);
-    handleNewRequest(question, time, model, originality, corpus);
+  const handleQuestionSubmit = (question: string, model: string, originality: number, corpus: string) => {
+    setInteractions((prevInteractions) => [...prevInteractions, { question: question, answer: 'Aan het nadenken...', model: model, originality: originality, corpus: corpus }]);
+    handleNewRequest(question, model, originality, corpus);
     scrollToBottom();
   };
 
@@ -51,10 +49,10 @@ const ChatArea: React.FC<ChatAreaProps> = ({ handleNewRequest, answer, question,
     <div className="chatArea">
       <div className="chatAreaScroller">
         {interactions.map((interaction, index) => (
-          <ChatInteraction key={index} question={interaction.question} answer={interaction.answer || ''} time={interaction.time} showSettings={showSettings} />
+          <ChatInteraction key={index} question={interaction.question} answer={interaction.answer || ''} />
         ))}
       </div>
-      <ChatConfiguration onQuestionSubmit={handleQuestionSubmit} showSettings={showSettings} toggleSettings={toggleSettings} />
+      <ChatConfiguration onQuestionSubmit={handleQuestionSubmit} />
     </div>
   );
 };

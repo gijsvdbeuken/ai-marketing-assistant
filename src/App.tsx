@@ -21,7 +21,7 @@ function App() {
     }
   }, [question, model]);
 
-  const handleNewRequest = (question: string, time: string, model: string, originality: number, corpus: string) => {
+  const handleNewRequest = (question: string, model: string, originality: number, corpus: string) => {
     updateRequest(question, model, originality, corpus);
   };
 
@@ -30,7 +30,7 @@ function App() {
       <div className="appContent">
         <SideBar isOpen={showSidebar} toggleSidebar={toggleSidebar}></SideBar>
         <div className="chatAreaContainer">
-          <ChatArea handleNewRequest={handleNewRequest} answer={answer} question={question} showSettings={showSettings} toggleSettings={toggleSettings} />
+          <ChatArea handleNewRequest={handleNewRequest} answer={answer} question={question} />
         </div>
       </div>
     </div>

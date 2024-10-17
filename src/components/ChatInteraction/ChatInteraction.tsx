@@ -2,15 +2,16 @@ import React, { useEffect } from 'react';
 import './ChatInteraction.css';
 import 'highlight.js/styles/github-dark.css';
 import hljs from 'highlight.js';
+import { useCurrentTime } from '../../utilities/useCurrentTime';
 
 interface ChatInteractionProps {
   question: string;
   answer: string;
-  time: string;
-  showSettings: boolean;
 }
 
-export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answer, time, showSettings }) => {
+export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answer }) => {
+  const currentTime = useCurrentTime();
+
   useEffect(() => {
     const codeBlocks = document.querySelectorAll('.chatbotMessage code');
     codeBlocks.forEach((block) => {
@@ -20,7 +21,7 @@ export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answ
 
   return (
     <div className="chatInteraction">
-      <small className="interactionTime">Om {time}</small>
+      <small className="interactionTime">Om {currentTime}</small>
       <div className="userRequest">
         {question ? (
           <div className="userMessage">
