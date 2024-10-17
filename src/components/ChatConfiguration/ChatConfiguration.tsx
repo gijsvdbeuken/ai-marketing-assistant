@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './ChatConfiguration.css';
-import jsonData from '../../data/geen-gedoe.json';
 import { useTemperature } from '../../utilities/useTemperature';
-import { use } from 'marked';
+import { useCorpus } from '../../utilities/useCorpus';
 
 interface ChatConfigurationProps {
   onQuestionSubmit: (question: string, model: string, originality: number, corpus: string) => void;
@@ -10,31 +9,18 @@ interface ChatConfigurationProps {
 
 const ChatConfiguration: React.FC<ChatConfigurationProps> = ({ onQuestionSubmit }) => {
   const [showSettings, setShowSettings] = useState<boolean>(true);
-  const toggleSettings = () => setShowSettings(!showSettings);
-
   const [question, setQuestion] = useState<string>('');
   const [model, setModel] = useState<string>('gpt-4o-mini');
   const [originality, setOriginality] = useState<string>('genuanceerd');
-  const [corpus, setCorpus] = useState<string>('geen');
+  const [corpusTitle, setCorpusTitle] = useState<string>('geen');
 
+  const { corpus } = useCorpus(corpusTitle);
   const { temperature } = useTemperature(originality);
 
-  const getCorpus = () => {
-    let stringifiedCorpus = '';
-    if (corpus !== 'geen') {
-      if (corpus === 'geen-gedoe') {
-        stringifiedCorpus = JSON.stringify(jsonData);
-        return stringifiedCorpus;
-      }
-    }
-    return stringifiedCorpus;
-  };
+  const toggleSettings = () => setShowSettings(!showSettings);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-
-    const corpus = getCorpus();
-
     onQuestionSubmit(question, model, temperature, corpus);
     setQuestion('');
   };
@@ -103,18 +89,7 @@ const ChatConfiguration: React.FC<ChatConfigurationProps> = ({ onQuestionSubmit 
             <div className="corpusTypes">
               <div className="companyCorpus">
                 <label>Presets</label>
-                <select className="corpusOptions" onChange={(e) => setCorpus(e.target.value)}>
-                  <option value="geen">Geen</option>
-                  <option value="geen-gedoe">Geen Gedoe</option>
-                  <option value="eleven-travel">Eleven Travel</option>
-                  <option value="loo-mare">Loo Mare</option>
-                  <option value="jade-styling">Jade Styling</option>
-                  <option value="aiki-sports">Aiki Sports</option>
-                </select>
-              </div>
-              <div className="otherCorpus">
-                <label>Overig</label>
-                <select className="corpusOptions">
+                <select className="corpusOptions" onChange={(e) => setCorpusTitle(e.target.value)}>
                   <option value="geen">Geen</option>
                   <option value="geen-gedoe">Geen Gedoe</option>
                   <option value="eleven-travel">Eleven Travel</option>

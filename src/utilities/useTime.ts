@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useCurrentTime = () => {
+export const useTime = () => {
   const [time, setTime] = useState<string>('');
 
   const updateCurrentTime = () => {

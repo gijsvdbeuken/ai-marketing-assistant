@@ -11,9 +11,16 @@ const SideBar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
     <div className={isOpen ? 'sideBar' : 'sideBarCollapsed'}>
       <div className="buttons">
         <button className="toggleButton" onClick={toggleSidebar}>
-          <i className="far fa-comment-alt"></i>
+          <i className="fa-solid fa-ellipsis-vertical"></i>
         </button>
-        {isOpen ? <button className="newChatButton">+ Nieuwe chat</button> : null}
+        {isOpen ? (
+          <>
+            <button className="toggleButton" onClick={toggleSidebar}>
+              <i className="fa-solid fa-gear"></i>
+            </button>
+            <button className="newChatButton">+ Nieuwe chat</button>
+          </>
+        ) : null}
       </div>
       {isOpen ? '' : null}
     </div>

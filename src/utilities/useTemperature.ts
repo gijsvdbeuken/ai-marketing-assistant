@@ -1,4 +1,3 @@
-// useTemperature.ts
 import { useState, useEffect } from 'react';
 
 export const useTemperature = (originality: string) => {

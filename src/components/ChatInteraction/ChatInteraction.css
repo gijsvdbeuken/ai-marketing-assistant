@@ -41,10 +41,6 @@
   margin-top: 5px;
 }
 
-.thinking {
-  color: var(--faded-text-color);
-}
-
 .showSettingsParagraph {
   color: var(--faded-color);
 }
@@ -59,4 +55,44 @@
   padding: 2px 4px;
   border-radius: 4px;
   background: #1e1e1e;
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0.33; /* Start and end at 50% opacity */
+  }
+  50% {
+    opacity: 0.6; /* At the middle (50%), it's at 100% opacity */
+  }
+}
+
+.thinking {
+  padding-top: 15px;
+  color: var(--text-color);
+  animation: fadeInOut 1s ease-in-out infinite;
+}
+
+.pfpMark {
+  font-family: 'Poppins';
+  font-weight: 500;
+  margin-top: 25px;
+  margin-right: 10px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(95, 60, 255);
+  height: 30px;
+  min-width: 30px;
+  border-radius: 25px;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 2s ease-in-out; /* Fade in over 2 seconds */
+}
+
+.fade-in.visible {
+  opacity: 1;
 }

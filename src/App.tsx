@@ -8,10 +8,7 @@ function App() {
   const { question, answer, model, apiRequest, updateRequest } = useAPI();
 
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
-  const [showSettings, setShowSettings] = useState<boolean>(true);
-
   const toggleSidebar = () => setShowSidebar(!showSidebar);
-  const toggleSettings = () => setShowSettings(!showSettings);
 
   useEffect(() => {
     if (question && model) {
