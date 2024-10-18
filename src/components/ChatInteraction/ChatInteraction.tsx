@@ -31,6 +31,7 @@ export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answ
           </>
         ) : null}
       </div>
+
       <div className="chatbotResponse">
         {answer == 'Aan het nadenken...' ? (
           <div className="chatbotMessageThinking">

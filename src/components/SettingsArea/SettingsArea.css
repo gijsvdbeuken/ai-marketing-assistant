@@ -1,0 +1,9 @@
+.settingsArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 800px;
+  min-height: 0;
+}
