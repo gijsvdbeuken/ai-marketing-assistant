@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../App.css';
 import './Sidebar2.css';
 
 const Sidebar2 = () => {
+  const navigate = useNavigate();
   const [showSidebar, setShowSidebar] = useState<boolean>(true);
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
+  };
+
+  const handleGoToHome = () => {
+    navigate('/');
+  };
+
+  const handleGoToSettings = () => {
+    navigate('/settings');
   };
 
   const handleNewChat = () => {
@@ -29,17 +38,17 @@ const Sidebar2 = () => {
             </button>
             <label>Algemeen</label>
             <div className="options">
-              <button className="optionBtn">
+              <button className="optionBtn" onClick={handleGoToHome}>
                 <div className="optionIcon">
                   <i className="fa-regular fa-message"></i>
                 </div>
                 <div>Chat met Mark</div>
               </button>
-              <button className="optionBtn">
+              <button className="optionBtn" onClick={handleGoToSettings}>
                 <div className="optionIcon">
                   <i className="fa-regular fa-file-lines"></i>
                 </div>
-                <div>Curpora beheren</div>
+                <div>Corpora beheren</div>
               </button>
               <button onClick={handleClick} className="optionBtn">
                 <div className="optionIcon">
