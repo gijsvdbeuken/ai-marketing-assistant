@@ -1,7 +1,14 @@
 import React from 'react';
+import './SettingsArea.css';
 
 const SettingsArea = () => {
-  return <div>SettingsArea</div>;
+  return (
+    <div className="settingsArea">
+      <div className="settingsAreaContainer">
+        <h1>Curpora beheren</h1>
+      </div>
+    </div>
+  );
 };
 
 export default SettingsArea;

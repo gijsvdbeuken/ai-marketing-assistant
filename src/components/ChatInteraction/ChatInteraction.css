@@ -60,10 +60,10 @@
 @keyframes fadeInOut {
   0%,
   100% {
-    opacity: 0.33; /* Start and end at 50% opacity */
+    opacity: 0.33;
   }
   50% {
-    opacity: 0.6; /* At the middle (50%), it's at 100% opacity */
+    opacity: 0.6;
   }
 }
 

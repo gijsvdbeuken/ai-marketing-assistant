@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import '../App.css';
-import ChatArea from '../components/ChatArea/ChatArea';
-import SideBar from '../components/SideBar/SideBar';
-import { useAPI } from '../utilities/useAPI';
+import '../../App.css';
+import ChatArea from '../../components/ChatArea/ChatArea';
+import Sidebar2 from '../../components/Sidebar2/Sidebar2';
+import { useAPI } from '../../utilities/useAPI';
 
 const Home = () => {
   const { question, answer, model, apiRequest, updateRequest } = useAPI();
@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <div className="App">
       <div className="appContent">
-        <SideBar isOpen={showSidebar} toggleSidebar={toggleSidebar}></SideBar>
+        <Sidebar2 />
         <div className="chatAreaContainer">
           <ChatArea handleNewRequest={handleNewRequest} answer={answer} question={question} />
         </div>

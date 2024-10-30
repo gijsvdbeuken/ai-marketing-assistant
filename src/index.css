@@ -62,6 +62,7 @@ code {
 }
 
 h1 {
+  margin: 0px;
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 24px;
@@ -69,13 +70,23 @@ h1 {
 }
 
 h2 {
+  margin: 10px 0px;
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 20px;
   color: var(--text-color);
 }
 
+h3 {
+  margin: 5px 0px;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
 label {
+  margin: 0px;
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 14px;
