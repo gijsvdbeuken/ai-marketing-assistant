@@ -17,7 +17,10 @@ const ChatConfiguration: React.FC<ChatConfigurationProps> = ({ onQuestionSubmit 
   const { corpus } = useCorpus(corpusTitle);
   const { temperature } = useTemperature(originality);
 
-  const toggleSettings = () => setShowSettings(!showSettings);
+  const toggleSettings = (event: React.MouseEvent) => {
+    event.preventDefault();
+    setShowSettings(!showSettings);
+  };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();

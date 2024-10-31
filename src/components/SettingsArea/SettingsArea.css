@@ -31,6 +31,17 @@
   flex-direction: column;
 }
 
+.inputSection {
+  display: flex;
+  gap: 10px;
+}
+
+.sectionPart {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .input {
   font-family: 'Poppins';
   font-size: 14px;
@@ -82,5 +93,4 @@ textArea:focus {
 }
 
 .label {
-  color: white;
 }

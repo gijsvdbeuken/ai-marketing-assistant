@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import '../../App.css';
 import ChatArea from '../../components/ChatArea/ChatArea';
-import Sidebar2 from '../../components/Sidebar/Sidebar';
+import Sidebar from '../../components/Sidebar/Sidebar';
 import { useAPI } from '../../utilities/useAPI';
 
 const Home = () => {
   const { question, answer, model, apiRequest, updateRequest } = useAPI();
-
-  const [showSidebar, setShowSidebar] = useState<boolean>(false);
-  const toggleSidebar = () => setShowSidebar(!showSidebar);
 
   useEffect(() => {
     if (question && model) {
@@ -25,7 +22,7 @@ const Home = () => {
   return (
     <div className="App">
       <div className="appContent">
-        <Sidebar2 />
+        <Sidebar />
         <div className="chatAreaContainer">
           <ChatArea handleNewRequest={handleNewRequest} answer={answer} question={question} />
         </div>
