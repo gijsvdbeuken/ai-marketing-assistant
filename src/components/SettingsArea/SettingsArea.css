@@ -1,9 +1,9 @@
 .settingsArea {
+  margin-top: 50px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   width: 100%;
-  padding-top: 50px;
 }
 
 .settingsAreaContainer {
@@ -15,6 +15,7 @@
 
 .mainInfoContainer {
   display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 

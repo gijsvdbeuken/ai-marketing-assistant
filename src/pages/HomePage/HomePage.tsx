@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../../App.css';
 import ChatArea from '../../components/ChatArea/ChatArea';
-import Sidebar2 from '../../components/Sidebar2/Sidebar2';
+import Sidebar2 from '../../components/Sidebar/Sidebar';
 import { useAPI } from '../../utilities/useAPI';
 
 const Home = () => {
