@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
-import '../../App.css';
+import { useEffect } from 'react';
 import ChatArea from '../../components/ChatArea/ChatArea';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { useAPI } from '../../utilities/useAPI';
+import '../../App.css';
 
 const Home = () => {
-  const { question, answer, model, apiRequest, updateRequest } = useAPI();
+  const { question, answer, apiRequest, updateRequest } = useAPI();
 
   useEffect(() => {
-    if (question && model) {
+    if (question) {
       if (question.trim() !== '') {
         apiRequest();
       }
     }
-  }, [question, model]);
+  }, [question]);
 
   const handleNewRequest = (question: string, model: string, originality: number, corpus: string) => {
     updateRequest(question, model, originality, corpus);

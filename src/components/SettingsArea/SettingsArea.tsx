@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './SettingsArea.css';
 import '../../App.css';
+import { useError } from '../../context/ErrContext';
 
 const SettingsArea = () => {
+  const { showError } = useError();
+
+  const handleError = () => {
+    showError('This is a sample error message!');
+  };
+
   interface Template {
     bedrijf: {
       algemeen: {
@@ -67,15 +74,15 @@ const SettingsArea = () => {
           inhoudelijk: {
             ...template.bedrijf.inhoudelijk,
             omschrijving: formData.omschrijving,
-            producten_diensten: formData.naam,
-            kernwaarde: formData.omschrijving,
-            doelgroep: formData.adres,
-            bedrijfswaarde: formData.website,
+            producten_diensten: formData.producten_diensten,
+            kernwaarde: formData.kernwaarde,
+            doelgroep: formData.doelgroep,
+            bedrijfswaarde: formData.bedrijfswaarde,
           },
           klantrelatie: {
             ...template.bedrijf.klantrelatie,
-            uitgeleende_werkzaamheden: formData.naam,
-            facturatie: formData.omschrijving,
+            uitgeleende_werkzaamheden: formData.uitgeleende_werkzaamheden,
+            facturatie: formData.facturatie,
           },
         },
       };
@@ -120,10 +127,9 @@ const SettingsArea = () => {
                 <input className="input" name="branche" value={formData.branche} onChange={handleChange} placeholder="Bijv. Marketing & communicatie" />
               </div>
             </div>
-
             <h2>Inhoudelijk</h2>
-            <label className="label">Bedrijfsomschrijving</label>
-            <textarea className="textArea" name="bedrijfsomschrijving" value={formData.omschrijving} onChange={handleChange} />
+            <label className="label">Omschrijving</label>
+            <textarea className="textArea" name="omschrijving" value={formData.omschrijving} onChange={handleChange} />
             <div className="inputSection">
               <div className="sectionPart">
                 <label className="label">Producten en/of diensten</label>
@@ -157,6 +163,7 @@ const SettingsArea = () => {
             </button>
           </div>
         </form>
+        <button onClick={handleError}>Trigger Error</button>
       </div>
     </div>
   );

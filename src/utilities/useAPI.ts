@@ -1,7 +1,10 @@
 // useAPI.ts
 import { useState } from 'react';
+import { useError } from '../context/ErrContext';
 
 export const useAPI = () => {
+  const { showError } = useError();
+
   const [question, setQuestion] = useState<string>('');
   const [answer, setAnswer] = useState<string>('');
   const [model, setModel] = useState<string>('');
@@ -21,6 +24,8 @@ export const useAPI = () => {
       const answerResponse = await response.json();
       setAnswer(answerResponse.content);
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      showError(errorMessage);
       setAnswer('Server niet bereikbaar: ' + error);
       console.error(error);
     }
@@ -37,7 +42,6 @@ export const useAPI = () => {
   return {
     question,
     answer,
-    model,
     apiRequest,
     updateRequest,
   };
