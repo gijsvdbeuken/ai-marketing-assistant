@@ -1,4 +1,3 @@
-// useAPI.ts
 import { useState } from 'react';
 import { useError } from '../context/ErrContext';
 
@@ -11,10 +10,17 @@ export const useAPI = () => {
   const [originality, setOriginality] = useState<number>();
   const [corpus, setCorpus] = useState<string>('');
 
-  const apiRequest = async () => {
+  const updateRequest = (question: string, model: string, originality: number, corpus: string) => {
+    setQuestion(question);
+    setModel(model);
+    setOriginality(originality);
+    setCorpus(corpus);
+    setAnswer('');
+  };
+
+  const submitRequest = async () => {
     const message = question;
     const max_tokens = 4096;
-
     try {
       const response = await fetch('http://localhost:3001/chat', {
         method: 'POST',
@@ -25,24 +31,16 @@ export const useAPI = () => {
       setAnswer(answerResponse.content);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
-      showError(errorMessage);
-      setAnswer('Server niet bereikbaar: ' + error);
+      showError(errorMessage + '. Controleer je OpenAI API-tegoed, de huidige serverstatus, en zorg ervoor dat je API-sleutel correct is gekoppeld aan je account.');
+      setAnswer('');
       console.error(error);
     }
-  };
-
-  const updateRequest = (question: string, model: string, originality: number, corpus: string) => {
-    setQuestion(question);
-    setModel(model);
-    setOriginality(originality);
-    setCorpus(corpus);
-    setAnswer('');
   };
 
   return {
     question,
     answer,
-    apiRequest,
     updateRequest,
+    submitRequest,
   };
 };

@@ -1,30 +1,30 @@
 import { useEffect } from 'react';
-import ChatArea from '../../components/ChatArea/ChatArea';
+import HomeArea from '../../components/HomeArea/HomeArea';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { useAPI } from '../../utilities/useAPI';
 import '../../App.css';
 
 const Home = () => {
-  const { question, answer, apiRequest, updateRequest } = useAPI();
+  const { question, answer, updateRequest, submitRequest } = useAPI();
+
+  const updateNewRequest = (question: string, model: string, originality: number, corpus: string) => {
+    updateRequest(question, model, originality, corpus);
+  };
 
   useEffect(() => {
     if (question) {
       if (question.trim() !== '') {
-        apiRequest();
+        submitRequest();
       }
     }
   }, [question]);
-
-  const handleNewRequest = (question: string, model: string, originality: number, corpus: string) => {
-    updateRequest(question, model, originality, corpus);
-  };
 
   return (
     <div className="App">
       <div className="appContent">
         <Sidebar />
         <div className="chatAreaContainer">
-          <ChatArea handleNewRequest={handleNewRequest} answer={answer} question={question} />
+          <HomeArea updateNewRequest={updateNewRequest} answer={answer} question={question} />
         </div>
       </div>
     </div>

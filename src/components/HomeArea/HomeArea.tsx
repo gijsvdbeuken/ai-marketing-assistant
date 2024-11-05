@@ -1,31 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ChatConfiguration from '../ChatConfiguration/ChatConfiguration';
-import { ChatInteraction } from '../ChatInteraction/ChatInteraction';
-import './ChatArea.css';
+import ChatConfiguration from '../Config/Config';
+import { Interaction } from '../Interaction/Interaction';
+import './HomeArea.css';
 
-interface ChatAreaProps {
-  handleNewRequest: (question: string, model: string, originality: number, corpus: string) => void;
+interface HomeAreaProps {
+  updateNewRequest: (question: string, model: string, originality: number, corpus: string) => void;
   answer: string;
   question: string;
 }
 
-const ChatArea: React.FC<ChatAreaProps> = ({ handleNewRequest, answer, question }) => {
+const HomeArea: React.FC<HomeAreaProps> = ({ updateNewRequest, answer, question }) => {
   const [interactions, setInteractions] = useState<{ question: string; answer: string | null; model: string; originality: number; corpus: string }[]>([]);
-  const scrollRef = useRef<HTMLDivElement | null>(null);
-
-  const scrollToBottom = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        top: scrollRef.current.scrollHeight,
-        behavior: 'smooth',
-      });
-    }
-  };
 
   const handleQuestionSubmit = (question: string, model: string, originality: number, corpus: string) => {
     setInteractions((prevInteractions) => [...prevInteractions, { question: question, answer: 'Aan het nadenken...', model: model, originality: originality, corpus: corpus }]);
-    handleNewRequest(question, model, originality, corpus);
-    scrollToBottom();
+    updateNewRequest(question, model, originality, corpus);
   };
 
   useEffect(() => {
@@ -49,7 +38,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ handleNewRequest, answer, question 
     <div className="chatArea">
       <div className="chatAreaScroller">
         {interactions.map((interaction, index) => (
-          <ChatInteraction key={index} question={interaction.question} answer={interaction.answer || ''} />
+          <Interaction key={index} question={interaction.question} answer={interaction.answer || ''} />
         ))}
       </div>
       <ChatConfiguration onQuestionSubmit={handleQuestionSubmit} />
@@ -57,4 +46,4 @@ const ChatArea: React.FC<ChatAreaProps> = ({ handleNewRequest, answer, question 
   );
 };
 
-export default ChatArea;
+export default HomeArea;

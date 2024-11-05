@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import './ChatInteraction.css';
+import './Interaction.css';
 import 'highlight.js/styles/github-dark.css';
 import hljs from 'highlight.js';
 import { useTime } from '../../utilities/useTime';
 
-interface ChatInteractionProps {
+interface InteractionProps {
   question: string;
   answer: string;
 }
 
-export const ChatInteraction: React.FC<ChatInteractionProps> = ({ question, answer }) => {
+export const Interaction: React.FC<InteractionProps> = ({ question, answer }) => {
   const currentTime = useTime();
 
   useEffect(() => {

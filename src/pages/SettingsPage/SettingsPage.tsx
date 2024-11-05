@@ -3,7 +3,7 @@ import './SettingsPage.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SettingsArea from '../../components/SettingsArea/SettingsArea';
 
-const Home = () => {
+const Settings = () => {
   return (
     <div className="settingsPage">
       <Sidebar />
@@ -12,4 +12,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Settings;

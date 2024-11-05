@@ -13,7 +13,11 @@ const ErrMsg: React.FC<ErrMsgProps> = ({ message, onClose, duration = 8000 }) =>
     return () => clearTimeout(timer); // Cleanup timer on unmount
   }, [onClose, duration]);
 
-  return <div className="error-message">Error: {message}. Informeer Rob over het probleem als het blijft aanhouden.</div>;
+  return (
+    <div className="error-message">
+      <i className="fa-regular fa-circle-xmark"></i> {message}
+    </div>
+  );
 };
 
 export default ErrMsg;
