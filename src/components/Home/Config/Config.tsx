@@ -33,7 +33,7 @@ const ChatConfiguration: React.FC<ChatConfigurationProps> = ({ onQuestionSubmit 
   }, [question]);
 
   return (
-    <div className="chatConfiguration">
+    <div className="config">
       <ConfigSearch sendQuestion={receiveQuestion} toggleSettingsHere={toggleSettings} />
       <div className="options">{showSettings ? <ConfigSettings sendSettings={receiveSettings} /> : null}</div>
     </div>

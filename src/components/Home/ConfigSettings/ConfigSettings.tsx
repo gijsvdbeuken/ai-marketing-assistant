@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useTemperature } from '../../utilities/useTemperature';
-import { useCorpus } from '../../utilities/useCorpus';
+import { useTemperature } from '../../../utilities/useTemperature';
+import { useCorpus } from '../../../utilities/useCorpus';
+import './ConfigSettings.css';
 
 interface ConfigSettingsInterface {
   sendSettings: (settings: { model: string; temperature: number; corpus: string }) => void;
@@ -36,7 +37,7 @@ const ConfigSettings: React.FC<ConfigSettingsInterface> = ({ sendSettings }) => 
     <>
       <label className="title">Parameters</label>
       <label>Model</label>
-      <div className="modelOptions">
+      <div className="parameters">
         <label className={`custom-button ${model === 'gpt-3.5-turbo' ? 'active' : ''}`}>
           <input type="radio" value="gpt-3.5-turbo" checked={model === 'gpt-3.5-turbo'} onChange={(e) => setModel(e.target.value)} />
           GPT-3.5 Turbo
@@ -55,7 +56,7 @@ const ConfigSettings: React.FC<ConfigSettingsInterface> = ({ sendSettings }) => 
         </label>
       </div>
       <label>Originaliteit</label>
-      <div className="modelOptions">
+      <div className="parameters">
         <label className={`custom-button ${originality === 'voorspelbaar' ? 'active' : ''}`}>
           <input type="radio" value="voorspelbaar" checked={originality === 'voorspelbaar'} onChange={(e) => setOriginality(e.target.value)} />
           Voorspelbaar
@@ -69,20 +70,18 @@ const ConfigSettings: React.FC<ConfigSettingsInterface> = ({ sendSettings }) => 
           Creatief
         </label>
       </div>
-      <div className="lineBreak"></div>
+      <div className="line-break"></div>
       <label className="title">Corpus</label>
-      <div className="corpusTypes">
-        <div className="companyCorpus">
-          <label>Presets</label>
-          <select className="corpusOptions" onChange={(e) => setCorpusTitle(e.target.value)}>
-            <option value="geen">Geen</option>
-            <option value="geen-gedoe">Geen Gedoe</option>
-            <option value="eleven-travel">Eleven Travel</option>
-            <option value="loo-mare">Loo Mare</option>
-            <option value="jade-styling">Jade Styling</option>
-            <option value="aiki-sports">Aiki Sports</option>
-          </select>
-        </div>
+      <div className="corpus">
+        <label>Presets</label>
+        <select className="corpus-options" onChange={(e) => setCorpusTitle(e.target.value)}>
+          <option value="geen">Geen</option>
+          <option value="geen-gedoe">Geen Gedoe</option>
+          <option value="eleven-travel">Eleven Travel</option>
+          <option value="loo-mare">Loo Mare</option>
+          <option value="jade-styling">Jade Styling</option>
+          <option value="aiki-sports">Aiki Sports</option>
+        </select>
       </div>
     </>
   );

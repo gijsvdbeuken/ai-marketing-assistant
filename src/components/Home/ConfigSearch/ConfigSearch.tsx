@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './ConfigSearch.css';
 
 interface ConfigSearchInterface {
   sendQuestion: (question: string) => void;
@@ -15,13 +16,13 @@ const ConfigSearch: React.FC<ConfigSearchInterface> = ({ sendQuestion, toggleSet
   };
 
   return (
-    <form onSubmit={handleSubmit} className="chatBar">
-      <div className="prompt">
-        <button className="settingsButton" onClick={toggleSettingsHere}>
+    <form onSubmit={handleSubmit} className="question-form">
+      <div className="question-bar">
+        <button className="settings-btn" onClick={toggleSettingsHere}>
           <i className="fa-solid fa-bars"></i>
         </button>
         <input
-          className="searchBar"
+          className="question-input"
           placeholder="Vraag iets aan Mark..."
           type="text"
           value={question}
@@ -29,7 +30,7 @@ const ConfigSearch: React.FC<ConfigSearchInterface> = ({ sendQuestion, toggleSet
             setQuestion(e.target.value);
           }}
         ></input>
-        <button className="submitButton" type={'submit'} disabled={question.trim() === ''}>
+        <button className="submit-btn" type={'submit'} disabled={question.trim() === ''}>
           <i className="fa-solid fa-arrow-up"></i>
         </button>
       </div>

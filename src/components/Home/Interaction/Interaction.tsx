@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Interaction.css';
 import 'highlight.js/styles/github-dark.css';
 import hljs from 'highlight.js';
-import { useTime } from '../../utilities/useTime';
+import { useTime } from '../../../utilities/useTime';
 
 interface InteractionProps {
   question: string;
@@ -31,7 +31,6 @@ export const Interaction: React.FC<InteractionProps> = ({ question, answer }) =>
           </>
         ) : null}
       </div>
-
       <div className="chatbotResponse">
         {answer == 'Aan het nadenken...' ? (
           <div className="chatbotMessageThinking">

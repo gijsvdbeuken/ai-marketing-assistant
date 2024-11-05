@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import ErrMsg from '../components/ErrMsg/ErrMsg';
+import ErrMsg from '../components/Other/ErrMsg/ErrMsg';
 
 interface ErrContextProps {
   showError: (message: string, duration?: number) => void;
